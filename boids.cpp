@@ -37,12 +37,12 @@
 
 #include "threadpool.hpp"
 
+#define LOG( A ) do{ std::cout.width(10);  std::cout << __func__ << " : " << A << std::endl; } while( false )
+
 //DEFINES
 #define BG_COLOR 255
 #define WIDTH 800
 #define HEIGHT 600
-
-using namespace std;
 
 double sign( double num ) {
     return num / abs( num );
@@ -156,12 +156,12 @@ class Boids {
     private:
         ThreadPool tp;
     public:
-        vector<Boid> boids;
-        vector<Boid> boids_new;
-        vector< Boid >::iterator thread0_begin;
-        vector< Boid >::iterator thread0_end;
-        vector< Boid >::iterator thread1_begin;
-        vector< Boid >::iterator thread1_end;
+        std::vector<Boid> boids;
+        std::vector<Boid> boids_new;
+        std::vector< Boid >::iterator thread0_begin;
+        std::vector< Boid >::iterator thread0_end;
+        std::vector< Boid >::iterator thread1_begin;
+        std::vector< Boid >::iterator thread1_end;
         Double eagle;
         double c_moveWith;
         double c_moveTo;
@@ -289,8 +289,8 @@ class Canvas : public Fl_Box {
             // the flock
             fl_color( fl_rgb_color( 0 ) );
 
-            for( vector< Boid >::iterator a = boids.boids.begin(); a != boids.boids.end(); ++a ) {
-                fl_pie( a->pos.x - 2, a->pos.y - 2, 4, 4, 0, 360 );
+            for( const Boid& boid : boids.boids ) {
+                fl_pie( boid.pos.x - 2, boid.pos.y - 2, 4, 4, 0, 360 );
             }
 
             // the eagle
@@ -302,7 +302,7 @@ class Canvas : public Fl_Box {
             // measure time between 100 iterations
             if( ( ++n_of_iterations ) > 100 ) {
                 std::chrono::system_clock::time_point tmp( std::chrono::system_clock::now() );
-                cout << std::chrono::duration_cast<std::chrono::seconds>( tmp - clock ).count() << "ms" << endl;
+                LOG( std::chrono::duration_cast<std::chrono::seconds>( tmp - clock ).count() << "ms" );
                 clock = tmp;
                 n_of_iterations = 0;
             };
@@ -321,55 +321,55 @@ class Canvas : public Fl_Box {
 
                 case 0:
                     c = 1 / exp( val - 9 );
-                    cout << "move with = " << c << endl;
+                    LOG( "move with = " << c );
                     boids.c_moveWith = c;
                     break;
 
                 case 1:
                     c = 1 / exp( val - 7 );
-                    cout << "move to = " << c << endl;
+                    LOG( "move to = " << c );
                     boids.c_moveTo = c;
                     break;
 
                 case 2:
                     c = 1 / exp( val - 20 );
-                    cout << "move away = " << c << endl;
+                    LOG( "move away = " << c );
                     boids.c_moveAway = c;
                     break;
 
                 case 3:
                     c = val;
-                    cout << "max speed = " << c << endl;
+                    LOG( "max speed = " << c );
                     boids.maxSpeed = c;
                     break;
 
                 case 4:
                     c = val;
-                    cout << "min distance = " << c << endl;
+                    LOG( "min distance = " << c );
                     boids.minDistance = c;
                     break;
 
                 case 5:
                     c = val;
-                    cout << "sight = " << c << endl;
+                    LOG( "sight = " << c );
                     boids.sight = c;
                     break;
 
                 case 6:
                     c = val;
-                    cout << "number of boids = " << c << endl;
+                    LOG( "number of boids = " << c );
                     boids.boids.resize( c );
                     boids.boids_new.resize( c );
                     break;
 
                 case 7:
                     c = exp( ( val - 30.0 ) / 4 );
-                    cout << "fear the eagle = " << c << endl;
+                    LOG( "fear the eagle = " << c );
                     boids.fearEagle = c;
                     break;
 
                 default:
-                    cout << "Huh, an error." << endl;
+                    LOG( "Huh, an error." );
                     break;
             }
         }
@@ -378,57 +378,57 @@ class Canvas : public Fl_Box {
             int key = 0;
             //int key_void = *(int*)((( Fl_Value_Slider* )w )->user_data());
             double val = ( ( Fl_Value_Slider* )w )->value();
-            cout << "key: " << key << "\tval: " << val << endl;
+            LOG( "key: " << key << "\tval: " << val );
             ( ( Canvas* )v )->set_val( key, val );
         }
         static void sl_moveTo_CB( Fl_Widget* w, void* v ) {
             int key = 1;
             double val = ( ( Fl_Value_Slider* )w )->value();
-            cout << "key: " << key << "\tval: " << val << endl;
+            LOG( "key: " << key << "\tval: " << val );
             ( ( Canvas* )v )->set_val( key, val );
         }
         static void sl_moveAway_CB( Fl_Widget* w, void* v ) {
             int key = 2;
             double val = ( ( Fl_Value_Slider* )w )->value();
-            cout << "key: " << key << "\tval: " << val << endl;
+            LOG( "key: " << key << "\tval: " << val );
             ( ( Canvas* )v )->set_val( key, val );
         }
         static void sl_maxSpeed_CB( Fl_Widget* w, void* v ) {
             int key = 3;
             double val = ( ( Fl_Value_Slider* )w )->value();
-            cout << "key: " << key << "\tval: " << val << endl;
+            LOG( "key: " << key << "\tval: " << val );
             ( ( Canvas* )v )->set_val( key, val );
         }
         static void sl_minDistance_CB( Fl_Widget* w, void* v ) {
             int key = 4;
             double val = ( ( Fl_Value_Slider* )w )->value();
-            cout << "key: " << key << "\tval: " << val << endl;
+            LOG( "key: " << key << "\tval: " << val );
             ( ( Canvas* )v )->set_val( key, val );
         }
         static void sl_sight_CB( Fl_Widget* w, void* v ) {
             int key = 5;
             double val = ( ( Fl_Value_Slider* )w )->value();
-            cout << "key: " << key << "\tval: " << val << endl;
+            LOG( "key: " << key << "\tval: " << val );
             ( ( Canvas* )v )->set_val( key, val );
         }
         static void sl_boids_CB( Fl_Widget* w, void* v ) {
             int key = 6;
             double val = ( ( Fl_Value_Slider* )w )->value();
-            cout << "key: " << key << "\tval: " << val << endl;
+            LOG( "key: " << key << "\tval: " << val );
             ( ( Canvas* )v )->set_val( key, val );
         }
 
         static void sl_fearEagle_CB( Fl_Widget* w, void* v ) {
             int key = 7;
             double val = ( ( Fl_Value_Slider* )w )->value();
-            cout << "key: " << key << "\tval: " << val << endl;
+            LOG( "key: " << key << "\tval: " << val );
             ( ( Canvas* )v )->set_val( key, val );
         }
 
         // static void sl_val_CB( Fl_Widget *w, void* v ) {
         //     int key = *(int*)(( Fl_Value_Slider* )w )->user_data();
         //     double val = (( Fl_Value_Slider* )w )->value();
-        //     cout << "key: " << key << "\tval: " << val << endl;
+        //     LOG( "key: " << key << "\tval: " << val );
         //     ((Canvas*)v)->set_val( key, val );
         // }
 
