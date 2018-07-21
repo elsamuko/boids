@@ -1,9 +1,9 @@
 CONFIG -= qt
 LIBS += -lfltk -lpthread
-SOURCES += boids.cpp
 
-SOURCES += threadpool.cpp
-SOURCES += threadpool.hpp
+SOURCES += ../src/boids.cpp
+SOURCES += ../src/threadpool.cpp
+HEADERS += ../src/threadpool.hpp
 
 CONFIG += c++14
 
