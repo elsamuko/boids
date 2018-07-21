@@ -151,6 +151,7 @@ class Boid {
         ~Boid() { }
 };
 
+
 // the group
 class Boids {
     private:
@@ -195,6 +196,7 @@ class Boids {
             int i = 0;
 
             for( const Boid& boid : boids ) {
+
                 dpos = in.pos - boid.pos;
                 d = dpos.abs();
 
@@ -432,12 +434,14 @@ class Canvas : public Fl_Box {
         Canvas( int numOfBoids, int X, int Y, int W, int H, const char* L = 0 ) : Fl_Box( X, Y, W, H, L ) {
             double max = double( RAND_MAX );
 
+            boids.boids.reserve( numOfBoids );
+
             for( int i = 0; i < numOfBoids; ++i ) {
                 double x  = rand() % w();
                 double y  = h(); // start from the bottom
                 double vx = rand() / max * 10.0 - 5;
                 double vy = rand() / max * 10.0 - 5;
-                boids.boids.push_back( Boid( x, y, vx, vy ) );
+                boids.boids.emplace_back( x, y, vx, vy );
             }
 
             boids.boids_new = boids.boids;
