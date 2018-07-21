@@ -49,31 +49,31 @@ double sign( double num ) {
 }
 
 // simple 2D vector class
-class Double {
+class vec2D {
     public:
         double x;
         double y;
-        Double( double xIn = 0.0, double yIn = 0.0 ): x( xIn ), y( yIn ) {  }
+        vec2D( double xIn = 0.0, double yIn = 0.0 ): x( xIn ), y( yIn ) {  }
 
-        Double& operator+=( const Double& in ) {
+        vec2D& operator+=( const vec2D& in ) {
             x += in.x;
             y += in.y;
             return *this;
         }
 
-        Double& operator-=( const Double& in ) {
+        vec2D& operator-=( const vec2D& in ) {
             x -= in.x;
             y -= in.y;
             return *this;
         }
 
-        Double& operator*=( const Double& in ) {
+        vec2D& operator*=( const vec2D& in ) {
             x *= in.x;
             y *= in.y;
             return *this;
         }
 
-        Double& operator*=( const double& in ) {
+        vec2D& operator*=( const double& in ) {
             x *= in;
             y *= in;
             return *this;
@@ -83,52 +83,52 @@ class Double {
             return sqrt( x * x + y * y );
         }
 
-        double distance( const Double& b )const {
+        double distance( const vec2D& b )const {
             double dx( x - b.x );
             double dy( y - b.y );
             return sqrt( dx * dx + dy * dy );
         }
 };
 
-inline Double operator+( Double const& a, Double const& b ) {
-    Double result( a );
+inline vec2D operator+( vec2D const& a, vec2D const& b ) {
+    vec2D result( a );
     result += b;
     return result;
 }
 
-inline Double operator-( Double const& a, Double const& b ) {
-    Double result( a );
+inline vec2D operator-( vec2D const& a, vec2D const& b ) {
+    vec2D result( a );
     result -= b;
     return result;
 }
 
-inline Double operator*( Double const& a, Double const& b )  {
-    Double result( a );
+inline vec2D operator*( vec2D const& a, vec2D const& b )  {
+    vec2D result( a );
     result *= b;
     return result;
 }
 
-inline Double operator*( Double const& a,  const double& b )  {
-    Double result( a );
+inline vec2D operator*( vec2D const& a,  const double& b )  {
+    vec2D result( a );
     result *= b;
     return result;
 }
 
-inline Double operator*( const double& a, Double const& b )  {
-    Double result( b );
+inline vec2D operator*( const double& a, vec2D const& b )  {
+    vec2D result( b );
     result *= a;
     return result;
 }
 
-inline Double operator/( Double const& a, const double& b ) {
+inline vec2D operator/( vec2D const& a, const double& b ) {
     return ( a * ( 1 / b ) );
 }
 
 // the individual
 class Boid {
     public:
-        Double pos; //position
-        Double mom; //momentum
+        vec2D pos; //position
+        vec2D mom; //momentum
 
         Boid( double xIn,
               double yIn,
@@ -158,11 +158,7 @@ class Boids {
     public:
         std::vector<Boid> boids;
         std::vector<Boid> boids_new;
-        std::vector< Boid >::iterator thread0_begin;
-        std::vector< Boid >::iterator thread0_end;
-        std::vector< Boid >::iterator thread1_begin;
-        std::vector< Boid >::iterator thread1_end;
-        Double eagle;
+        vec2D eagle;
         double c_moveWith;
         double c_moveTo;
         double c_moveAway;
@@ -191,10 +187,10 @@ class Boids {
 
         // follow three rules: seperation, cohesion, alignment
         void threeRules( Boid& in ) {
-            Double dpos;
-            Double MA_DPOS;
-            Double MT_DPOS;
-            Double MW_MOM;
+            vec2D dpos;
+            vec2D MA_DPOS;
+            vec2D MT_DPOS;
+            vec2D MW_MOM;
             double d  = 0;
             int i = 0;
 
@@ -220,7 +216,7 @@ class Boids {
 
         // flee from the eagle
         void fleeFromEagle( Boid& in ) {
-            Double dpos = in.pos - eagle;
+            vec2D dpos = in.pos - eagle;
             double d = dpos.abs();
 
             if( d < sight ) {
@@ -515,7 +511,7 @@ class Canvas : public Fl_Box {
 
             switch( e ) {
                 case FL_MOVE:
-                    boids.eagle = Double( Fl::event_x(), Fl::event_y() );
+                    boids.eagle = vec2D( Fl::event_x(), Fl::event_y() );
                     break;
             }
 
