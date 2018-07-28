@@ -1,0 +1,48 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+class MainWindow {open
+} {
+  Function {MainWindow()} {open
+  } {
+    Fl_Window mainWindow {open selected
+      xywh {96 161 1505 810} type Double hide
+    } {
+      Fl_Group mainView {open
+        xywh {5 5 1200 800}
+      } {
+        Fl_Box canvas {
+          xywh {5 5 1200 800} box FLAT_BOX color 7
+          code0 {\#include "canvas.hpp"}
+          class Canvas
+        }
+      }
+      Fl_Group controls {
+        label Controls open
+        xywh {1215 21 280 233} box BORDER_BOX
+      } {
+        Fl_Spinner spinnerMoveWith {
+          label {Move With}
+          callback {canvas->setMoveWith( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1375 45 60 25} minimum -100 maximum 200 value 100
+        }
+        Fl_Spinner spinnerMoveTo {
+          label {Move To}
+          callback {canvas->setMoveTo( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1375 90 60 30} minimum -100 maximum 200 value 100
+        }
+        Fl_Spinner spinnerMoveAway {
+          label {Move Away}
+          callback {canvas->setMoveAway( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1375 140 60 25} minimum -100 maximum 200 value 100
+        }
+      }
+    }
+  }
+  Function {show(int argc, char** argv)} {open
+  } {
+    code {mainWindow->show();
+mainWindow->redraw();} {}
+  }
+}
