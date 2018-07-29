@@ -43,7 +43,7 @@ class Boid {
 };
 
 inline std::ostream& operator<<( std::ostream& os, const Boid& boid ) {
-    os << boid.pos << " " << boid.mom << " " << boid.accel;
+    os << boid.pos << " " << boid.mom.abs() << " " << boid.accel.abs();
     return os;
 }
 
@@ -57,6 +57,7 @@ class Boids {
         std::vector<Boid> boids_old;
         std::vector<Boid> boids_new;
         vec2D eagle;
+        bool   debug;
         double c_moveWith;
         double c_moveTo;
         double c_moveAway;
@@ -71,7 +72,7 @@ class Boids {
                double maxSpeedIn    = 5,
                double maxAccel      = 0.5,
                double sightIn       = 200,
-               double fearEagleIn   = 1.0 );
+               double fearEagleIn   = 0.0 );
 
         // follow three rules: seperation, cohesion, alignment
         void threeRules( Boid& boid );

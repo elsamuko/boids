@@ -22,6 +22,7 @@ inline double fastPow( double a, double b ) {
 Boids::Boids( double c_moveWithIn, double c_moveToIn, double c_moveAwayIn, double maxSpeedIn, double maxAccel, double sightIn, double fearEagleIn ) :
     generator( std::chrono::system_clock::now().time_since_epoch().count() ),
     distribution( 0.0, maxSpeedIn / 25.0 ),
+    debug( false ),
     c_moveWith( c_moveWithIn ),
     c_moveTo( c_moveToIn ),
     c_moveAway( c_moveAwayIn ),
