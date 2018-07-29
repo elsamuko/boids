@@ -65,8 +65,9 @@ class Canvas : public Fl_Box {
             boids.boids_new.resize( val );
         }
         void setFearEagle( int val ) {
-            LOG( "Fear Eagle: " << val );
-            boids.fearEagle = val;
+            boids.fearEagle = val / 100.0;
+            LOG( "Fear Eagle: " << boids.fearEagle );
+        }
         }
 
 

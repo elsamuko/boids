@@ -83,8 +83,8 @@ void Boids::fleeFromEagle( Boid& in ) {
     double distance = dpos.abs();
 
     if( distance > std::numeric_limits<double>::epsilon() && distance < sight ) {
-        in.fear = 200 * dpos.norm() * fastPow( distance / 10.0, -1.0 );
-        in.accel -= /*fearEagle * */ in.fear;
+        in.fear = 200 * dpos.norm() * fastPow( distance / 5.0, -1.0 );
+        in.accel -= fearEagle * in.fear;
     }
 }
 
@@ -126,7 +126,10 @@ void Boids::iterate_all() {
             boid.accel.reset();
             // follow the three boid rules
             threeRules( boid );
-            // fleeFromEagle( boid );
+
+            if( fearEagle > std::numeric_limits<double>::epsilon() ) {
+                fleeFromEagle( boid );
+            }
 
             // some randomness
             boid.accel.x += distribution( generator );
