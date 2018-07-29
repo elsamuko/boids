@@ -23,3 +23,4 @@ HEADERS += $${SRC_DIR}/vec2d.hpp
 include( setup.pri )
 include( linux.pri )
 include( gui.pri )
+include( libs.pri )
