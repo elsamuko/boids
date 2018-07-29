@@ -9,6 +9,7 @@ unix {
 
 unix {
     # fltk
+    LIBS += -lpthread
     LIBS += $$MAIN_DIR/libs/fltk/bin/$$PLATFORM/$$COMPILE_MODE/libfltk_images.a
     LIBS += $$MAIN_DIR/libs/fltk/bin/$$PLATFORM/$$COMPILE_MODE/libfltk.a
 }
@@ -19,12 +20,21 @@ macx {
 
 win32 {
     # fltk
-    LIBS += /LIBPATH:$$MAIN_DIR/libs/fltk/bin/$$PLATFORM/$$COMPILE_MODE
+    LIBS += /LIBPATH:$$MAIN_DIR/libs/fltk/bin/win/$$COMPILE_MODE
     LIBS += fltkimages$${COMPILE_FLAG}.lib
     LIBS += fltk$${COMPILE_FLAG}.lib
     LIBS += fltkjpeg$${COMPILE_FLAG}.lib
     LIBS += fltkpng$${COMPILE_FLAG}.lib
 
     # windows
+    LIBS += DelayImp.lib
     LIBS += Gdi32.lib User32.lib Ole32.lib Advapi32.lib Shell32.lib Comdlg32.lib
+    QMAKE_LFLAGS += /DELAYLOAD:Gdi32.dll
+    QMAKE_LFLAGS += /DELAYLOAD:User32.dll
+    QMAKE_LFLAGS += /DELAYLOAD:Ole32.dll
+    QMAKE_LFLAGS += /DELAYLOAD:Advapi32.dll
+    QMAKE_LFLAGS += /DELAYLOAD:Shell32.dll
+    QMAKE_LFLAGS += /DELAYLOAD:Comdlg32.dll
+    QMAKE_LFLAGS += /DELAYLOAD:Comctl32.dll
+    message($$LIBS)
 }

@@ -1,8 +1,6 @@
 CONFIG -= qt
 CONFIG += c++14
 
-LIBS += -lfltk -lpthread
-
 MAIN_DIR =..
 SRC_DIR  =../src
 INCLUDEPATH += $${SRC_DIR}
@@ -21,6 +19,8 @@ SOURCES += $${SRC_DIR}/boids.cpp
 HEADERS += $${SRC_DIR}/vec2d.hpp
 
 include( setup.pri )
-include( linux.pri )
+linux: include( linux.pri )
+win32: CONFIG += static
+win32: include( win.pri )
 include( gui.pri )
 include( libs.pri )
