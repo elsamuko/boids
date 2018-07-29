@@ -91,19 +91,19 @@ void Boids::fleeFromEagle( Boid& in ) {
 
 void Boids::borderConstraints( Boid& boid ) {
     if( boid.pos.x > WIDTH ) {
-        boid.pos.x = 0;
+        boid.accel.x = -maxAccel;
     }
 
     if( boid.pos.y > HEIGHT ) {
-        boid.pos.y = 0;
+        boid.accel.y = -maxAccel;
     }
 
     if( boid.pos.x < 0 ) {
-        boid.pos.x = WIDTH;
+        boid.accel.x = maxAccel;
     }
 
     if( boid.pos.y < 0 ) {
-        boid.pos.y = HEIGHT;
+        boid.accel.y = maxAccel;
     }
 
     // limit speed
