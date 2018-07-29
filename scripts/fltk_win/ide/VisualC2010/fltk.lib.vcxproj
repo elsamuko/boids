@@ -136,7 +136,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>.;..\..\zlib;..\..\png;..\..\jpeg;../..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;FL_LIBRARY;WIN32;_DEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <BrowseInformation>true</BrowseInformation>
@@ -151,6 +151,9 @@
       <OutputFile>..\..\lib\$(ProjectName)d.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\..\abi-version.ide" "$(SolutionDir)..\..\FL\abi-version.h"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -172,6 +175,9 @@
       <OutputFile>..\..\lib\$(ProjectName)d.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\..\abi-version.ide" "$(SolutionDir)..\..\FL\abi-version.h"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -180,7 +186,7 @@
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <AdditionalIncludeDirectories>.;..\..\zlib;..\..\png;..\..\jpeg;../..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;FL_LIBRARY;WIN32;NDEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -196,12 +202,15 @@
       <OutputFile>..\..\lib\$(ProjectName).lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\..\abi-version.ide" "$(SolutionDir)..\..\FL\abi-version.h"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <AdditionalIncludeDirectories>.;..\..\zlib;..\..\png;..\..\jpeg;../..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;FL_LIBRARY;WIN32;NDEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -220,6 +229,9 @@
       <OutputFile>..\..\lib\$(ProjectName).lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\..\abi-version.ide" "$(SolutionDir)..\..\FL\abi-version.h"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Cairo|Win32'">
     <ClCompile>
@@ -245,6 +257,9 @@
       <OutputFile>..\..\lib\fltkd.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\..\abi-version.ide" "$(SolutionDir)..\..\FL\abi-version.h"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Cairo|x64'">
     <ClCompile>
@@ -270,6 +285,9 @@
       <OutputFile>..\..\lib\fltkd.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\..\abi-version.ide" "$(SolutionDir)..\..\FL\abi-version.h"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Cairo|Win32'">
     <ClCompile>
@@ -295,6 +313,9 @@
       <OutputFile>..\..\lib\fltk.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\..\abi-version.ide" "$(SolutionDir)..\..\FL\abi-version.h"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Cairo|x64'">
     <ClCompile>
@@ -320,6 +341,9 @@
       <OutputFile>..\..\lib\fltk.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\..\abi-version.ide" "$(SolutionDir)..\..\FL\abi-version.h"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\FL\Fl.H" />
