@@ -81,6 +81,6 @@ inline vec2D operator/( vec2D const& a, const double& b ) {
 }
 
 inline std::ostream& operator<<( std::ostream& os, const vec2D& vec ) {
-    os << "[" << vec.x << " " << vec.y << "]";
+    os << "[" << int( vec.x ) << " " << int( vec.y ) << "]";
     return os;
 }
