@@ -1,9 +1,4 @@
 
-# ui
-INCLUDEPATH += $${SRC_DIR}/gui
-HEADERS += $$files($${SRC_DIR}/gui/*.h)
-SOURCES += $$files($${SRC_DIR}/gui/*.cxx)
-
 # fluid
 fluid_cpp.output = ${QMAKE_FILE_PATH}$${DIR_SEPARATOR}${QMAKE_FILE_BASE}.cpp
 fluid_cpp.commands = cd ${QMAKE_FILE_PATH} && fluid -c -o ${QMAKE_FILE_BASE}.cpp -h ${QMAKE_FILE_BASE}.hpp ${QMAKE_FILE_BASE}.fl
