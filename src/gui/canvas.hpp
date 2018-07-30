@@ -40,7 +40,7 @@ class Canvas : public Fl_Box {
             LOG( "Max Speed: " << boids.maxSpeed );
         }
         void setMaxAccel( int val ) {
-            boids.maxAccel = val / 1000.0;
+            boids.maxAccel = val / 200.0;
             LOG( "Max Accel: " << boids.maxAccel );
         }
         void setSight( int val ) {
