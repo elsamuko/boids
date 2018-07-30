@@ -19,17 +19,22 @@ inline double fastPow( double a, double b ) {
     return u.d;
 }
 
-Boids::Boids( double c_moveWithIn, double c_moveToIn, double c_moveAwayIn, double maxSpeedIn, double maxAccel, double sightIn, double fearEagleIn ) :
+Boids::Boids( int widthIn, int heightIn, int countIn, double c_moveWithIn, double c_moveToIn, double c_moveAwayIn, double maxSpeedIn, double maxAccel, double sightIn, double fearEagleIn ) :
     generator( std::chrono::system_clock::now().time_since_epoch().count() ),
     distribution( 0.0, maxSpeedIn / 25.0 ),
     debug( false ),
+    width( widthIn ),
+    height( heightIn ),
     c_moveWith( c_moveWithIn ),
     c_moveTo( c_moveToIn ),
     c_moveAway( c_moveAwayIn ),
     maxSpeed( maxSpeedIn ),
     maxAccel( maxAccel ),
     sight( sightIn ),
-    fearEagle( fearEagleIn ) {}
+    fearEagle( fearEagleIn ) {
+
+    this->resize( countIn );
+}
 
 void Boids::threeRules( Boid& boid ) {
     vec2D dpos; // delta position
@@ -90,11 +95,11 @@ void Boids::fleeFromEagle( Boid& in ) {
 }
 
 void Boids::borderConstraints( Boid& boid ) {
-    if( boid.pos.x > WIDTH ) {
+    if( boid.pos.x > width ) {
         boid.accel.x = -maxAccel;
     }
 
-    if( boid.pos.y > HEIGHT ) {
+    if( boid.pos.y > height ) {
         boid.accel.y = -maxAccel;
     }
 
@@ -145,5 +150,23 @@ void Boids::iterate_all() {
 
     tp.waitForAllJobs();
     boids_old = boids_new;
+}
+
+void Boids::resize( int size ) {
+    if( size <= 0 ) { size = 1; }
+
+    int diff = size - boids_old.size();
+
+    if( diff > 0 ) {
+        boids_old.reserve( size );
+
+        for( int i = 0; i < diff; ++i ) {
+            boids_old.emplace_back( width, height ); // add needed
+        }
+    } else {
+        boids_old.resize( size, Boid( 0, 0 ) ); // remove not needed
+    }
+
+    boids_new = boids_old;
 }
 

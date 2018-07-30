@@ -8,71 +8,72 @@ class MainWindow {open
   } {
     Fl_Window mainWindow {
       label Boids open
-      private xywh {96 161 1505 810} type Double visible
+      private xywh {100 178 1505 810} type Double resizable visible
     } {
       Fl_Group mainView {open
-        private xywh {5 5 1200 800}
+        private xywh {5 5 1285 800}
       } {
         Fl_Box canvas {
-          private xywh {5 5 1200 800} box FLAT_BOX color 7
+          private xywh {5 5 1285 800} box FLAT_BOX color 7 resizable
           code0 {\#include "canvas.hpp"}
           class Canvas
         }
       }
       Fl_Group controls {
         label Controls open
-        private xywh {1215 33 280 572} box BORDER_BOX
+        private xywh {1295 33 200 494} box BORDER_BOX
       } {
         Fl_Spinner spinnerMoveWith {
           label {Move With}
-          callback {canvas->setMoveWith( ( ( Fl_Spinner* )o )->value() );} selected
-          private xywh {1365 57 60 25} minimum 0 maximum 500 step 5 value 100
+          callback {canvas->setMoveWith( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1422 55 60 25} minimum 0 maximum 500 step 5 value 100
         }
         Fl_Spinner spinnerMoveTo {
           label {Move To}
-          callback {canvas->setMoveTo( ( ( Fl_Spinner* )o )->value() );} selected
-          private xywh {1365 111 60 25} minimum 0 maximum 500 step 5 value 100
+          callback {canvas->setMoveTo( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1422 109 60 25} minimum 0 maximum 500 step 5 value 100
         }
         Fl_Spinner spinnerMoveAway {
           label {Move Away}
-          callback {canvas->setMoveAway( ( ( Fl_Spinner* )o )->value() );} selected
-          private xywh {1365 165 60 25} minimum 0 maximum 500 step 5 value 100
+          callback {canvas->setMoveAway( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1422 163 60 25} minimum 0 maximum 500 step 5 value 100
         }
         Fl_Spinner spinnerMaxSpeed {
           label {Max Speed}
-          callback {canvas->setMaxSpeed( ( ( Fl_Spinner* )o )->value() );} selected
-          private xywh {1365 220 60 25} minimum 0 maximum 500 value 100
+          callback {canvas->setMaxSpeed( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1422 218 60 25} minimum 0 maximum 500 value 100
         }
         Fl_Spinner spinnerMaxAccel {
           label {Max Accel}
-          callback {canvas->setMaxAccel( ( ( Fl_Spinner* )o )->value() );} selected
-          private xywh {1365 274 60 25} minimum 0 maximum 500 value 100
+          callback {canvas->setMaxAccel( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1422 272 60 25} minimum 0 maximum 500 value 100
         }
         Fl_Spinner spinnerSight {
           label Sight
-          callback {canvas->setSight( ( ( Fl_Spinner* )o )->value() );} selected
-          private xywh {1365 328 60 25} minimum 0 maximum 1000 step 5 value 200
+          callback {canvas->setSight( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1422 326 60 25} minimum 0 maximum 1000 step 5 value 200
         }
         Fl_Spinner spinnerBoids {
           label {Number of Boids}
-          callback {canvas->setBoids( ( ( Fl_Spinner* )o )->value() );} selected
-          private xywh {1365 383 60 25} minimum 0 maximum 1000 step 10 value 200
+          callback {canvas->setBoids( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1422 381 60 25} minimum 0 maximum 1000 step 10 value 200
         }
         Fl_Spinner spinnerFearEagle {
           label {Fear Eagle}
-          callback {canvas->setFearEagle( ( ( Fl_Spinner* )o )->value() );} selected
-          private xywh {1365 437 60 25} minimum 0 maximum 500 value 0
+          callback {canvas->setFearEagle( ( ( Fl_Spinner* )o )->value() );}
+          private xywh {1422 435 60 25} minimum 0 maximum 500 value 0
         }
         Fl_Light_Button buttonDebug {
           label Debug
-          callback {canvas->setDebug( ( ( Fl_Light_Button* )o )->value() );} selected
-          private xywh {1358 492 74 20}
+          callback {canvas->setDebug( ( ( Fl_Light_Button* )o )->value() );}
+          private xywh {1415 490 74 20}
         }
       }
     }
   }
-  Function {show(int /*argc*/, char** /*argv*/)} {open
+  Function {show( int argc, char** argv )} {open
   } {
-    code {mainWindow->show();} {}
+    code {mainWindow->show( argc, argv );} {selected
+    }
   }
 }

@@ -17,6 +17,7 @@ class Canvas : public Fl_Box {
 
     private:
         void draw();
+        void resize( int x, int y, int w, int h );
 
         static void Timer( void* in );
 
@@ -48,8 +49,7 @@ class Canvas : public Fl_Box {
             LOG( "Sight: " << boids.sight );
         }
         void setBoids( int val ) {
-            boids.boids_old.resize( val );
-            boids.boids_new.resize( val );
+            boids.resize( val );
             LOG( "Boids: " << val );
         }
         void setFearEagle( int val ) {

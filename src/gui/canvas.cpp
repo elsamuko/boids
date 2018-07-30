@@ -3,14 +3,13 @@
 void Canvas::Timer( void* in ) {
     Canvas* canvas = ( Canvas* )in;
     canvas->redraw();
-    Fl::repeat_timeout( 0.05, Timer, in );
+    Fl::repeat_timeout( 0.025, Timer, in );
 }
 
-Canvas::Canvas( int X, int Y, int W, int H, const char* L ) : Fl_Box( X, Y, W, H, L ) {
-    boids.boids_old.resize( 200 );
-    boids.boids_new = boids.boids_old;
-    redraw();
-    Fl::add_timeout( 0.05, Timer, ( void* )this );
+Canvas::Canvas( int X, int Y, int W, int H, const char* L ) :
+    Fl_Box( X, Y, W, H, L ),
+    boids( W, H ) {
+    Fl::add_timeout( 0.025, Timer, ( void* )this );
 }
 
 int Canvas::handle( int event ) {
@@ -78,4 +77,11 @@ void Canvas::draw() {
         iterations = 0;
         LOG( boids.boids_old[0] );
     }
+}
+
+void Canvas::resize( int x, int y, int w, int h ) {
+    Fl_Box::resize( x, y, w, h );
+    boids.width = w;
+    boids.height = h;
+    LOG( "Resize canvas " << w << " x " << h );
 }

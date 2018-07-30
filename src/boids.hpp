@@ -9,10 +9,6 @@
 
 #define LOG( A ) do{ std::cout.width(10);  std::cout << __func__ << " : " << A << std::endl; } while( false )
 
-//DEFINES
-#define WIDTH 1200
-#define HEIGHT 800
-
 // the individual
 class Boid {
     public:
@@ -33,10 +29,10 @@ class Boid {
             mom.y = vyIn;
         }
 
-        Boid() {
+        Boid( int width, int height ) {
             double max = double( RAND_MAX );
-            pos.x  = rand() / max * WIDTH;
-            pos.y  = rand() / max * HEIGHT;
+            pos.x  = rand() / max * width;
+            pos.y  = rand() / max * height;
             mom.x = rand() / max * 10.0 - 5;
             mom.y = rand() / max * 10.0 - 5;
         }
@@ -58,6 +54,8 @@ class Boids {
         std::vector<Boid> boids_new;
         vec2D eagle;
         bool   debug;
+        int    width;
+        int    height;
         double c_moveWith;
         double c_moveTo;
         double c_moveAway;
@@ -66,7 +64,10 @@ class Boids {
         double sight;
         double fearEagle;
 
-        Boids( double c_moveWithIn  = 1.0,
+        Boids( int widthIn,
+               int heightIn,
+               int countIn            = 200,
+               double c_moveWithIn  = 1.0,
                double c_moveToIn    = 1.0,
                double c_moveAwayIn  = 1.0,
                double maxSpeedIn    = 5,
@@ -79,4 +80,5 @@ class Boids {
         void fleeFromEagle( Boid& in );
         void borderConstraints( Boid& in );
         void iterate_all();
+        void resize( int size );
 };
