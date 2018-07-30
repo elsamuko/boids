@@ -95,19 +95,23 @@ void Boids::fleeFromEagle( Boid& in ) {
 }
 
 void Boids::borderConstraints( Boid& boid ) {
-    if( boid.pos.x > width ) {
+
+    double lower = 0.1;
+    double upper = 0.9;
+
+    if( boid.pos.x > upper * width ) {
         boid.accel.x = -maxAccel;
     }
 
-    if( boid.pos.y > height ) {
+    if( boid.pos.y > upper * height ) {
         boid.accel.y = -maxAccel;
     }
 
-    if( boid.pos.x < 0 ) {
+    if( boid.pos.x < lower * width ) {
         boid.accel.x = maxAccel;
     }
 
-    if( boid.pos.y < 0 ) {
+    if( boid.pos.y < lower * height ) {
         boid.accel.y = maxAccel;
     }
 
