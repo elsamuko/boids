@@ -51,7 +51,7 @@ function doConfigure {
 }
 
 function doBuild {
-    cd "$SRC_DIR/$PROJECT-$VERSION"
+    cd "$BUILD_DIR"
 
     export CC="clang"
     export CXX="clang++"
@@ -74,11 +74,13 @@ function doBuild {
 }
 
 function doCopy {
-    mkdir -p "$TARGET_DIR/bin/$OS/debug"
+    mkdir -p "$TARGET_DIR/lib/$OS/debug"
+    mkdir -p "$TARGET_DIR/lib/$OS/release"
     mkdir -p "$TARGET_DIR/bin/$OS/release"
     mkdir -p "$TARGET_DIR/include"
-    cp -r "$BUILD_DIR/debug/lib"/* "$TARGET_DIR/bin/$OS/debug"
-    cp -r "$BUILD_DIR/release/lib"/* "$TARGET_DIR/bin/$OS/release"
+    cp -r "$BUILD_DIR/debug/lib"/* "$TARGET_DIR/lib/$OS/debug"
+    cp -r "$BUILD_DIR/release/lib"/* "$TARGET_DIR/lib/$OS/release"
+    cp -r "$BUILD_DIR/release/bin"/* "$TARGET_DIR/bin/$OS/release"
     cp -r "$BUILD_DIR/release/include/"* "$TARGET_DIR/include"
 }
 

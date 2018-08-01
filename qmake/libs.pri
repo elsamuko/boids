@@ -8,8 +8,8 @@ unix {
 }
 
 unix {
-    LIBS += $$MAIN_DIR/libs/fltk/bin/$$PLATFORM/$$COMPILE_MODE/libfltk.a
-    LIBS += $$MAIN_DIR/libs/fltk/bin/$$PLATFORM/$$COMPILE_MODE/libfltk_images.a
+    LIBS += $$MAIN_DIR/libs/fltk/lib/$$PLATFORM/$$COMPILE_MODE/libfltk.a
+    LIBS += $$MAIN_DIR/libs/fltk/lib/$$PLATFORM/$$COMPILE_MODE/libfltk_images.a
     # fltk-config --ldstaticflags
     LIBS += -lXrender -lXcursor -lXfixes -lXext -lXft -lfontconfig -lXinerama -lpthread -ldl -lm -lX11
 }
@@ -20,7 +20,7 @@ macx {
 
 win32 {
     # fltk
-    LIBS += /LIBPATH:$$MAIN_DIR/libs/fltk/bin/win/$$COMPILE_MODE
+    LIBS += /LIBPATH:$$MAIN_DIR/libs/fltk/lib/win/$$COMPILE_MODE
     LIBS += fltk$${COMPILE_FLAG}.lib
     LIBS += fltkimages$${COMPILE_FLAG}.lib
     LIBS += fltkjpeg$${COMPILE_FLAG}.lib

@@ -76,11 +76,13 @@ function doBuild {
 }
 
 function doCopy {
-    mkdir -p "$TARGET_DIR/bin/$OS/debug"
+    mkdir -p "$TARGET_DIR/lib/$OS/debug"
+    mkdir -p "$TARGET_DIR/lib/$OS/release"
     mkdir -p "$TARGET_DIR/bin/$OS/release"
     mkdir -p "$TARGET_DIR/include"
-    cp -r "$BUILD_DIR/lib_debug"/* "$TARGET_DIR/bin/$OS/debug"
-    cp -r "$BUILD_DIR/lib_release"/* "$TARGET_DIR/bin/$OS/release"
+    cp -r "$BUILD_DIR/lib_debug"/* "$TARGET_DIR/lib/$OS/debug"
+    cp -r "$BUILD_DIR/lib_release"/* "$TARGET_DIR/lib/$OS/release"
+    cp -r "$BUILD_DIR/fluid"/* "$TARGET_DIR/bin/$OS/release"
     cp -r "$BUILD_DIR/FL" "$TARGET_DIR/include"
 }
 
