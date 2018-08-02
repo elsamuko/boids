@@ -17,6 +17,7 @@ class Boid {
         vec2D accel;    // momentum change
         vec2D moveTo;   // center of visible boids
         vec2D moveAway; // direction to avoid crowding
+        vec2D moveWith; // relative direction of others
         vec2D fear;     // direction to flee from eagle
 
         Boid( double xIn,

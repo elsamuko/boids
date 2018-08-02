@@ -80,7 +80,8 @@ void Boids::threeRules( Boid& boid ) {
         boid.moveTo = 0.13 * ( ( MT_DPOS / i ) - boid.pos );
         boid.accel += c_moveTo * boid.moveTo;
 
-        boid.accel += c_moveWith * 2.0 * MW_MOM  / i;
+        boid.moveWith = 2.0 * MW_MOM  / i;
+        boid.accel += c_moveWith * boid.moveWith;
     }
 }
 
