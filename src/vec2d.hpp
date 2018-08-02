@@ -32,7 +32,8 @@ class vec2D {
         }
 
         double abs() const {
-            return sqrt( x * x + y * y );
+            double rv = sqrt( x * x + y * y );
+            return rv;
         }
 
         void reset() {
@@ -42,7 +43,8 @@ class vec2D {
 
         vec2D norm() const {
             double length = abs();
-            return vec2D( x / length, y / length );
+            vec2D rv( x / length, y / length );
+            return rv;
         }
 };
 
