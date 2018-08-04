@@ -3,6 +3,8 @@
 
 #include "boids.hpp"
 
+#define THREADED 1
+
 inline double sign( double num ) {
     if( num  > 0.0 ) { return 1.0; }
     else { return -1.0; }
@@ -131,7 +133,9 @@ void Boids::borderConstraints( Boid& boid ) {
 
 void Boids::iterate_all() {
     for( Boid& boid : boids_new ) {
+#if THREADED
         tp.add( [this, &boid] {
+#endif
             boid.accel.reset();
             // follow the three boid rules
             threeRules( boid );
@@ -148,7 +152,9 @@ void Boids::iterate_all() {
             borderConstraints( boid );
             boid.mom += boid.accel;
             boid.pos += boid.mom;
+#if THREADED
         } );
+#endif
     }
 
     tp.waitForAllJobs();
