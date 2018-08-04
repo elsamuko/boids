@@ -67,12 +67,12 @@ class Boids {
 
         Boids( int widthIn,
                int heightIn,
-               int countIn            = 200,
+               int countIn          = 200,
                double c_moveWithIn  = 1.0,
                double c_moveToIn    = 1.0,
                double c_moveAwayIn  = 1.0,
                double maxSpeedIn    = 5,
-               double maxAccel      = 0.5,
+               double maxAccelIn    = 0.5,
                double sightIn       = 200,
                double fearEagleIn   = 0.0 );
 

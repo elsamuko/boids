@@ -19,7 +19,7 @@ inline double fastPow( double a, double b ) {
     return u.d;
 }
 
-Boids::Boids( int widthIn, int heightIn, int countIn, double c_moveWithIn, double c_moveToIn, double c_moveAwayIn, double maxSpeedIn, double maxAccel, double sightIn, double fearEagleIn ) :
+Boids::Boids( int widthIn, int heightIn, int countIn, double c_moveWithIn, double c_moveToIn, double c_moveAwayIn, double maxSpeedIn, double maxAccelIn, double sightIn, double fearEagleIn ) :
     generator( std::chrono::system_clock::now().time_since_epoch().count() ),
     distribution( 0.0, maxSpeedIn / 25.0 ),
     debug( false ),
@@ -29,7 +29,7 @@ Boids::Boids( int widthIn, int heightIn, int countIn, double c_moveWithIn, doubl
     c_moveTo( c_moveToIn ),
     c_moveAway( c_moveAwayIn ),
     maxSpeed( maxSpeedIn ),
-    maxAccel( maxAccel ),
+    maxAccel( maxAccelIn ),
     sight( sightIn ),
     fearEagle( fearEagleIn ) {
 
