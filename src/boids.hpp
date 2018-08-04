@@ -41,6 +41,7 @@ class Boid {
 
 inline std::ostream& operator<<( std::ostream& os, const Boid& boid ) {
     os << boid.pos << " " << boid.mom.abs() << " " << boid.accel.abs();
+    os << " MA " << boid.moveAway.abs() << ", MT " << boid.moveTo.abs() << ", MW " << boid.moveWith.abs();
     return os;
 }
 
