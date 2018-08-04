@@ -21,7 +21,7 @@ inline double fastPow( double a, double b ) {
 
 Boids::Boids( int widthIn, int heightIn, int countIn, double c_moveWithIn, double c_moveToIn, double c_moveAwayIn, double maxSpeedIn, double maxAccelIn, double sightIn, double fearEagleIn ) :
     generator( std::chrono::system_clock::now().time_since_epoch().count() ),
-    distribution( 0.0, maxSpeedIn / 25.0 ),
+    distribution( 0.0, maxAccelIn / 10.0 ),
     debug( false ),
     width( widthIn ),
     height( heightIn ),
@@ -39,7 +39,6 @@ Boids::Boids( int widthIn, int heightIn, int countIn, double c_moveWithIn, doubl
 void Boids::threeRules( Boid& boid ) {
     vec2D dpos; // delta position
     vec2D ddir; // delta direction (normalized position)
-    vec2D dmom; // normalized momentum
     vec2D MA_DPOS;
     vec2D MT_DPOS;
     vec2D MW_MOM;
@@ -58,7 +57,6 @@ void Boids::threeRules( Boid& boid ) {
 
             i++; // count boids in sight
             ddir = dpos.norm();
-            dmom = other.mom.norm();
 
             // separation: steer to avoid crowding local flockmates
             // closer ones repulse stronger
@@ -68,19 +66,19 @@ void Boids::threeRules( Boid& boid ) {
             MT_DPOS += other.pos;
 
             // alignment: steer towards the average heading of local flockmates
-            MW_MOM += dmom;
+            MW_MOM += other.mom;
         }
     }
 
     // correct boids acceleration
     if( i > 0 ) {
-        boid.moveAway = 200 * MA_DPOS / i;
+        boid.moveAway = 450 * MA_DPOS / i;
         boid.accel += c_moveAway * boid.moveAway;
 
         boid.moveTo = 0.13 * ( ( MT_DPOS / i ) - boid.pos );
         boid.accel += c_moveTo * boid.moveTo;
 
-        boid.moveWith = 2.0 * MW_MOM  / i;
+        boid.moveWith = 0.5 * ( MW_MOM  / i );
         boid.accel += c_moveWith * boid.moveWith;
     }
 }
