@@ -151,8 +151,8 @@ void Boids::iterate_all() {
 
             // set new place
             borderConstraints( boid );
-            boid.mom += boid.accel;
             boid.pos += boid.mom;
+            boid.mom += boid.accel;
 #if THREADED
         } );
 #endif
