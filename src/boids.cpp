@@ -65,7 +65,7 @@ void Boids::threeRules( Boid& boid ) {
             MA_DPOS -= ddir * fastPow( distance / 5.0, -1.0 );
 
             // cohesion: steer to move toward the average position of local flockmates
-            MT_DPOS += other.pos;
+            MT_DPOS += other.pos - boid.pos;
 
             // alignment: steer towards the average heading of local flockmates
             MW_MOM += other.mom;
@@ -74,13 +74,13 @@ void Boids::threeRules( Boid& boid ) {
 
     // correct boids acceleration
     if( i > 0 ) {
-        boid.moveAway = 450 * MA_DPOS / i;
+        boid.moveAway = 1.0  * MA_DPOS;
         boid.accel += c_moveAway * boid.moveAway;
 
-        boid.moveTo = 0.13 * ( ( MT_DPOS / i ) - boid.pos );
+        boid.moveTo   = 1.0  * MT_DPOS.norm();
         boid.accel += c_moveTo * boid.moveTo;
 
-        boid.moveWith = 0.5 * ( MW_MOM  / i );
+        boid.moveWith = 0.15 * MW_MOM.norm();
         boid.accel += c_moveWith * boid.moveWith;
     }
 }
