@@ -99,21 +99,22 @@ void Boids::borderConstraints( Boid& boid ) {
 
     double lower = 0.1;
     double upper = 0.9;
+    double da = 1.0;
 
     if( boid.pos.x > upper * width ) {
-        boid.accel.x = -maxAccel;
+        boid.accel.x -= da * maxAccel;
     }
 
     if( boid.pos.y > upper * height ) {
-        boid.accel.y = -maxAccel;
+        boid.accel.y -= da * maxAccel;
     }
 
     if( boid.pos.x < lower * width ) {
-        boid.accel.x = maxAccel;
+        boid.accel.x += da * maxAccel;
     }
 
     if( boid.pos.y < lower * height ) {
-        boid.accel.y = maxAccel;
+        boid.accel.y += da * maxAccel;
     }
 
     // limit speed
