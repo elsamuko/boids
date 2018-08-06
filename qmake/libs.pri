@@ -10,6 +10,9 @@ unix {
 unix {
     LIBS += $$MAIN_DIR/libs/fltk/lib/$$PLATFORM/$$COMPILE_MODE/libfltk.a
     LIBS += $$MAIN_DIR/libs/fltk/lib/$$PLATFORM/$$COMPILE_MODE/libfltk_images.a
+}
+
+linux {
     # fltk-config --ldstaticflags
     LIBS += -lXrender -lXcursor -lXfixes -lXext -lXft -lfontconfig -lXinerama -lpthread -ldl -lm -lX11
 }
