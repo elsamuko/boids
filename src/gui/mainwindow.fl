@@ -7,73 +7,72 @@ class MainWindow {open
   Function {MainWindow()} {open
   } {
     Fl_Window mainWindow {
-      label Boids open
-      private xywh {100 178 1505 810} type Double resizable visible
+      label Boids open selected
+      private xywh {75 45 1205 755} type Double hide resizable
     } {
       Fl_Group mainView {open
-        private xywh {5 5 1285 800}
+        private xywh {5 5 985 750}
       } {
         Fl_Box canvas {
-          private xywh {5 5 1285 800} box FLAT_BOX color 7 resizable
+          private xywh {5 5 985 745} box FLAT_BOX color 7 resizable
           code0 {\#include "canvas.hpp"}
           class Canvas
         }
       }
       Fl_Group controls {
         label Controls open
-        private xywh {1295 33 200 494} box BORDER_BOX
+        private xywh {995 33 200 494} box BORDER_BOX
       } {
         Fl_Spinner spinnerMoveWith {
           label {Move With}
           callback {canvas->setMoveWith( ( ( Fl_Spinner* )o )->value() );}
-          private xywh {1422 55 60 25} minimum 0 maximum 500 step 5 value 100
+          private xywh {1122 55 60 25} minimum 0 maximum 500 step 5 value 100
         }
         Fl_Spinner spinnerMoveTo {
           label {Move To}
           callback {canvas->setMoveTo( ( ( Fl_Spinner* )o )->value() );}
-          private xywh {1422 109 60 25} minimum 0 maximum 500 step 5 value 100
+          private xywh {1122 109 60 25} minimum 0 maximum 500 step 5 value 100
         }
         Fl_Spinner spinnerMoveAway {
           label {Move Away}
           callback {canvas->setMoveAway( ( ( Fl_Spinner* )o )->value() );}
-          private xywh {1422 163 60 25} minimum 0 maximum 500 step 5 value 100
+          private xywh {1122 163 60 25} minimum 0 maximum 500 step 5 value 100
         }
         Fl_Spinner spinnerMaxSpeed {
           label {Max Speed}
           callback {canvas->setMaxSpeed( ( ( Fl_Spinner* )o )->value() );}
-          private xywh {1422 218 60 25} minimum 0 maximum 500 value 100
+          private xywh {1122 218 60 25} minimum 0 maximum 500 value 100
         }
         Fl_Spinner spinnerMaxAccel {
           label {Max Accel}
           callback {canvas->setMaxAccel( ( ( Fl_Spinner* )o )->value() );}
-          private xywh {1422 272 60 25} minimum 0 maximum 500 value 100
+          private xywh {1122 272 60 25} minimum 0 maximum 500 value 100
         }
         Fl_Spinner spinnerSight {
           label Sight
           callback {canvas->setSight( ( ( Fl_Spinner* )o )->value() );}
-          private xywh {1422 326 60 25} minimum 0 maximum 1000 step 5 value 200
+          private xywh {1122 326 60 25} minimum 0 maximum 1000 step 5 value 200
         }
         Fl_Spinner spinnerBoids {
           label {Number of Boids}
           callback {canvas->setBoids( ( ( Fl_Spinner* )o )->value() );}
-          private xywh {1422 381 60 25} minimum 0 maximum 1000 step 10 value 200
+          private xywh {1122 381 60 25} minimum 0 maximum 1000 step 10 value 200
         }
         Fl_Spinner spinnerFearEagle {
           label {Fear Eagle}
           callback {canvas->setFearEagle( ( ( Fl_Spinner* )o )->value() );}
-          private xywh {1422 435 60 25} minimum 0 maximum 500 value 0
+          private xywh {1122 435 60 25} minimum 0 maximum 500 value 0
         }
         Fl_Light_Button buttonDebug {
           label Debug
           callback {canvas->setDebug( ( ( Fl_Light_Button* )o )->value() );}
-          private xywh {1415 490 74 20}
+          private xywh {1115 490 74 20}
         }
       }
     }
   }
   Function {show( int argc, char** argv )} {open
   } {
-    code {mainWindow->show( argc, argv );} {selected
-    }
+    code {mainWindow->show( argc, argv );} {}
   }
 }
